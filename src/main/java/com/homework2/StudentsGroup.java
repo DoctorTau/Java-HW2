@@ -3,9 +3,56 @@ package com.homework2;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class StudentsGroup {
     private ArrayList<Student> studentsUnmarked;
     private ArrayList<Student> studentsMarked;
+
+    public StudentsGroup() {
+        studentsUnmarked = new ArrayList<Student>();
+        studentsMarked = new ArrayList<Student>();
+        studentsUnmarked.add(new Student("John"));
+        studentsUnmarked.add(new Student("Mary"));
+        studentsUnmarked.add(new Student("Robert"));
+        studentsUnmarked.add(new Student("Michael"));
+    }
+
+    public StudentsGroup(ArrayList<Student> students) {
+        studentsUnmarked = students;
+        studentsMarked = new ArrayList<Student>();
+    }
+
+    public void markRandom() {
+        if (studentsUnmarked.size() == 0) {
+            System.out.println("There are no students to mark.\n");
+            return;
+        }
+        String answer = "";
+        Student student = getRandomUnmarkedStudent();
+        System.out.println("Is student " + student.getName() + " present?\n" + "(y - Yes, n - No)");
+        answer = GetPresenceStatusFromConsole(answer);
+        if (answer.toLowerCase().charAt(0) == 'y') {
+            SetMarkFromConsole(student);
+        }
+        System.out.println("Student " + student.getName() + " marked.");
+    }
+
+    public void addStudent(Student student) {
+        studentsUnmarked.add(student);
+    }
+
+    public String toString() {
+        String result = "Group of " + studentsMarked.size() + " students:\n\n";
+        for (Student student : studentsMarked) {
+            result += student.toString() + "\n";
+            result += "--------------------------------\n";
+        }
+        result = result.substring(0, result.length() - 1);
+        return result;
+    }
 
     private Student getRandomUnmarkedStudent() {
         Student student = studentsUnmarked.get(new Random().nextInt(studentsUnmarked.size()));
@@ -23,21 +70,6 @@ public class StudentsGroup {
             student.setMark(mark);
         else
             throw new IllegalArgumentException("Student " + student + " is absent");
-    }
-
-    public void markRandom() {
-        if (studentsUnmarked.size() == 0) {
-            System.out.println("There are no students to mark.\n");
-            return;
-        }
-        String answer = "";
-        Student student = getRandomUnmarkedStudent();
-        System.out.println("Is student " + student.getName() + " present?\n" + "(y - Yes, n - No)");
-        answer = GetPresenceStatusFromConsole(answer);
-        if (answer.toLowerCase().charAt(0) == 'y') {
-            SetMarkFromConsole(student);
-        }
-        System.out.println("Student " + student.getName() + " marked.");
     }
 
     private String GetPresenceStatusFromConsole(String answer) {
@@ -70,28 +102,5 @@ public class StudentsGroup {
             }
         }
         setStudentMark(student, mark);
-    }
-
-    public StudentsGroup() {
-        studentsUnmarked = new ArrayList<Student>();
-        studentsMarked = new ArrayList<Student>();
-        studentsUnmarked.add(new Student("John"));
-        studentsUnmarked.add(new Student("Mary"));
-        studentsUnmarked.add(new Student("Robert"));
-        studentsUnmarked.add(new Student("Michael"));
-    }
-
-    public void addStudent(Student student) {
-        studentsUnmarked.add(student);
-    }
-
-    public String toString() {
-        String result = "Group of " + studentsMarked.size() + " students:\n\n";
-        for (Student student : studentsMarked) {
-            result += student.toString() + "\n";
-            result += "--------------------------------\n";
-        }
-        result = result.substring(0, result.length() - 1);
-        return result;
     }
 }

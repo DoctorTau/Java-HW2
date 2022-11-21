@@ -1,0 +1,21 @@
+{
+    "studentsUnmarked": [
+        {
+            "name": "Pasha Mironov",
+            "mark": null
+        },
+        {
+            "name": "Vita Stepashkina",
+            "mark": null
+        },
+        {
+            "name": "Kolya Parahin",
+            "mark": null
+        },
+        {
+            "name": "Tim Tih",
+            "mark": null
+        }
+    ],
+    "studentsMarked": []
+}

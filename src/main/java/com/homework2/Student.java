@@ -1,11 +1,25 @@
 package com.homework2;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Student {
     private String name;
     private Integer mark = null;
 
+    public Student() {
+        name = "";
+        mark = null;
+    }
+
     public Student(String name) {
         this.name = name;
+    }
+
+    public Student(String name, Integer mark) {
+        this.name = name;
+        this.mark = mark;
     }
 
     public void setMark(Integer mark) {
