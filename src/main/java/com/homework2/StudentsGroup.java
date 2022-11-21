@@ -1,3 +1,5 @@
+package com.homework2;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,7 +25,7 @@ public class StudentsGroup {
             throw new IllegalArgumentException("Student " + student + " is absent");
     }
 
-    public void MarkRandom() {
+    public void markRandom() {
         if (studentsUnmarked.size() == 0) {
             System.out.println("There are no students to mark.\n");
             return;
@@ -40,7 +42,7 @@ public class StudentsGroup {
 
     private String GetPresenceStatusFromConsole(String answer) {
         while (true) {
-            answer = Program.scanner.nextLine();
+            answer = App.scanner.nextLine();
             if (answer.equals("y") || answer.equals("n"))
                 break;
             else
@@ -54,7 +56,7 @@ public class StudentsGroup {
         System.out.println("Set " + student.getName() + "'s mark");
         int mark;
         while (true) {
-            answer = Program.scanner.nextLine();
+            answer = App.scanner.nextLine();
             try {
                 mark = Integer.parseInt(answer);
                 if (mark < 0 || mark > 10) {

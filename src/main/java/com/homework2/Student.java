@@ -1,3 +1,5 @@
+package com.homework2;
+
 public class Student {
     private String name;
     private Integer mark = null;
